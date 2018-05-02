@@ -1,74 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true">
 
-    <ImageView
-        android:id="@+id/detail_activity_image"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        android:src="@drawable/pun"
-        />
-    <LinearLayout
-        android:id="@+id/detail_activity_names"
-        android:layout_below="@id/detail_activity_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:layout_height="300dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <TextView
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:id="@+id/detail_activity_owner_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="16sp"
-            tools:text="Owner name: Susan"/>
-        <View
-            android:paddingTop="10dp"
-            android:paddingBottom="5dp"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
             android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
-        <TextView
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:id="@+id/detail_activity_owner_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="16sp"
-            tools:text="Owner number: 800-222-1111" />
-    </LinearLayout>
-    <View
-        android:id="@+id/placeholder"
-        android:layout_below="@id/detail_activity_names"
-        android:layout_width="wrap_content"
-        android:layout_height="10dp"
-        android:background="@android:color/darker_gray"/>
-    <LinearLayout
-        android:id="@+id/detail_activity_description"
-        android:layout_below="@id/placeholder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
-        <TextView
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:id="@+id/detail_activity_description_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            tools:text="@string/description" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-</RelativeLayout>
+            <ImageView
+                android:contentDescription="@string/app_name"
+                android:id="@+id/detail_activity_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:src="@drawable/pun" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/detail_activity_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/detail_activity_ScrollView"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".DetailActivity"
+            android:padding="8dp">
+
+            <TextView
+                style="@style/Owner_info_style"
+                android:id="@+id/detail_activity_owner_name"
+                tools:text="Owner name: Susan"/>
+
+            <View
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@android:color/holo_red_dark"/>
+
+            <TextView
+                style="@style/Owner_info_style"
+                android:id="@+id/detail_activity_owner_number"
+                tools:text="Owner number: 800-222-1111" />
+
+            <View
+                android:id="@+id/placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@android:color/holo_red_light"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/white"
+                android:padding="8dp">
+
+                <TextView
+                    android:paddingTop="5dp"
+                    android:id="@+id/detail_activity_description_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    tools:text="@string/description" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/detail_activity_floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_anchor="@id/detail_activity_ScrollView"
+        app:layout_anchorGravity="top|end"
+        android:src="@drawable/ic_phone_white_36dp"/>
+
+</android.support.design.widget.CoordinatorLayout>

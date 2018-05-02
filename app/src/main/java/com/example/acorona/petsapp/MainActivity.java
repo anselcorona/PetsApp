@@ -1,12 +1,18 @@
 package com.example.acorona.petsapp;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -16,11 +22,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.activity_main_toolbar);
 
+        toolbar.setTitle(getString(R.string.app_name));
         RecyclerView petRecycler = findViewById(R.id.activity_main_recyclerview);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        petRecycler.setLayoutManager(linearLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+        petRecycler.setLayoutManager(gridLayoutManager);
 
         ArrayList<Pet> petList = new ArrayList<>();
 
@@ -41,7 +49,13 @@ public class MainActivity extends AppCompatActivity {
             public void onPetClick(Pet pet) {
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 intent.putExtra("PET", pet);
+            if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP){
+                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle();
                 startActivity(intent);
+            }else{
+                startActivity(intent);
+            }
+
             }
         });
     }
